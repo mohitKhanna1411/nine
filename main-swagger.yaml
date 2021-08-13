@@ -1,0 +1,269 @@
+swagger: '2.0'
+info:
+  description: Blue Technical Test
+  version: 1.0.0
+  title: Nine Publishing
+  contact:
+    email: khanna.mohit94@gmail.com
+basePath: /v1
+tags:
+  - name: auth
+    description: Authentication Services
+  - name: article
+    description: Article Services
+paths:
+  /auth/login:
+    post:
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/token_details'
+        '400':
+          description: Missing Username/Password
+          schema:
+            $ref: '#/definitions/error'
+        '403':
+          description: Invalid Username/Password
+          schema:
+            $ref: '#/definitions/error'
+      operationId: post_login
+      parameters:
+        - name: payload
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/login_details'
+      tags:
+        - auth
+  /auth/signup:
+    post:
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/token_details'
+        '400':
+          description: Missing Username/Password
+          schema:
+            $ref: '#/definitions/error'
+        '409':
+          description: Username Taken
+          schema:
+            $ref: '#/definitions/error'
+      operationId: post_signup
+      parameters:
+        - name: payload
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/signup_details'
+      tags:
+        - auth
+  /article/:
+    post:
+      responses:
+        '200':
+          description: Success
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  id:
+                    type: number
+                    example: 1
+              - $ref: "#/definitions/article_payload"
+
+        '400':
+          description: Malformed Request
+          schema:
+            $ref: '#/definitions/error'
+        '403':
+          description: Invalid Auth Token
+          schema:
+            $ref: '#/definitions/error'
+      operationId: post_article
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: Your Authorization Token in the form 'Token <AUTH_TOKEN>'
+        - name: payload
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/article_payload'
+      tags:
+        - article
+  /article/{articleId}:
+    get:
+      tags:
+      - article
+      description: "Returns a single article"
+      operationId: "getArticleById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: Your Authorization Token in the form 'Token <AUTH_TOKEN>'
+      - name: "articleId"
+        in: "path"
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            allOf:
+              - type: "object"
+                properties:
+                  id:
+                    type: number
+                    example: 1
+              - $ref: "#/definitions/article_payload"
+        "400":
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Article Not Found
+          schema:
+            $ref: '#/definitions/error'
+        '403':
+          description: Invalid Auth Token
+          schema:
+            $ref: '#/definitions/error'
+  /tags/{tagName}/{date}:
+    get:
+      tags:
+      - article
+      operationId: "getTagsByTagNameDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: Your Authorization Token in the form 'Token <AUTH_TOKEN>'
+      - name: "tagName"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "date"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/tag_details"
+        "400":
+          description: Invalid Tag or Date supplied
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Article Not Found
+          schema:
+            $ref: '#/definitions/error'
+definitions:
+  article_payload:
+    required:
+      - title
+      - date
+      - body
+      - tags
+    properties:
+      title:
+        type: string
+        example: 'latest science shows that potato chips are better for you than sugar'
+      date:
+        type: string
+        example: '2016-09-22'
+      body:
+        type: string
+        example: 'some text, potentially containing simple markup about how potato chips are great'
+      tags:
+        type: array
+        items:
+          type: string
+        example: ["health", "fitness", "science"]
+    type: object
+  tag_details:
+    required:
+      - tag
+      - count
+      - articles
+      - related_tags
+    properties:
+      tag:
+        type: string
+        example: 'health'
+      count:
+        type: integer
+        example: 17
+      articles:
+        type: array
+        items:
+          type: integer
+          example: 1
+      related_tags:
+        type: array
+        items:
+          type: string
+        example: ["science", "fitness"]
+    type: object
+  login_details:
+    required:
+      - password
+      - username
+    properties:
+      username:
+        type: string
+        example: mohitkhanna
+      password:
+        type: string
+        example: khanna1234
+    type: object
+  token_details:
+    properties:
+      token:
+        type: string
+    type: object
+  signup_details:
+    required:
+      - email
+      - name
+      - password
+      - username
+      - role
+    properties:
+      username:
+        type: string
+        example: mohitkhanna
+      password:
+        type: string
+        example: khanna1234
+      email:
+        type: string
+        example: khanna@mohit.com
+      name:
+        type: string
+        example: mohit
+      role:
+        type: string
+        enum:
+          - Contributor
+          - Explorer
+    type: object
+  error:
+    type: object
+    properties:
+      message:
+        type: string
+        example: Error Message
