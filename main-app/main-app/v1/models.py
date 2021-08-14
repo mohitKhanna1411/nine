@@ -47,9 +47,9 @@ class Tags(BaseTable):
     article_id = ForeignKeyField(Articles, backref='tags')
 
 
-def create_db(db_file):
+def create_db():
     # check for file
-    if os.path.exists(db_file):
+    if os.path.exists(DB_NAME):
         print("Database already exists.")
         return False
     # creating the tables

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   description: Blue Technical Test
   version: 1.0.0
@@ -15,55 +15,55 @@ paths:
   /auth/login:
     post:
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/token_details'
-        '400':
+            $ref: "#/definitions/token_details"
+        "400":
           description: Missing Username/Password
           schema:
-            $ref: '#/definitions/error'
-        '403':
+            $ref: "#/definitions/error"
+        "403":
           description: Invalid Username/Password
           schema:
-            $ref: '#/definitions/error'
+            $ref: "#/definitions/error"
       operationId: post_login
       parameters:
         - name: payload
           required: true
           in: body
           schema:
-            $ref: '#/definitions/login_details'
+            $ref: "#/definitions/login_details"
       tags:
         - auth
   /auth/signup:
     post:
       responses:
-        '200':
+        "201":
           description: Success
           schema:
-            $ref: '#/definitions/token_details'
-        '400':
+            $ref: "#/definitions/token_details"
+        "400":
           description: Missing Username/Password
           schema:
-            $ref: '#/definitions/error'
-        '409':
+            $ref: "#/definitions/error"
+        "409":
           description: Username Taken
           schema:
-            $ref: '#/definitions/error'
+            $ref: "#/definitions/error"
       operationId: post_signup
       parameters:
         - name: payload
           required: true
           in: body
           schema:
-            $ref: '#/definitions/signup_details'
+            $ref: "#/definitions/signup_details"
       tags:
         - auth
   /article/:
     post:
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             allOf:
@@ -74,14 +74,14 @@ paths:
                     example: 1
               - $ref: "#/definitions/article_payload"
 
-        '400':
+        "400":
           description: Malformed Request
           schema:
-            $ref: '#/definitions/error'
-        '403':
+            $ref: "#/definitions/error"
+        "403":
           description: Invalid Auth Token
           schema:
-            $ref: '#/definitions/error'
+            $ref: "#/definitions/error"
       operationId: post_article
       parameters:
         - name: Authorization
@@ -93,27 +93,27 @@ paths:
           required: true
           in: body
           schema:
-            $ref: '#/definitions/article_payload'
+            $ref: "#/definitions/article_payload"
       tags:
         - article
   /article/{articleId}:
     get:
       tags:
-      - article
+        - article
       description: "Returns a single article"
       operationId: "getArticleById"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: Your Authorization Token in the form 'Token <AUTH_TOKEN>'
-      - name: "articleId"
-        in: "path"
-        required: true
-        type: integer
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: Your Authorization Token in the form 'Token <AUTH_TOKEN>'
+        - name: "articleId"
+          in: "path"
+          required: true
+          type: integer
       responses:
         "200":
           description: Success
@@ -128,36 +128,36 @@ paths:
         "400":
           description: Invalid ID supplied
           schema:
-            $ref: '#/definitions/error'
+            $ref: "#/definitions/error"
         "404":
           description: Article Not Found
           schema:
-            $ref: '#/definitions/error'
-        '403':
+            $ref: "#/definitions/error"
+        "403":
           description: Invalid Auth Token
           schema:
-            $ref: '#/definitions/error'
+            $ref: "#/definitions/error"
   /tags/{tagName}/{date}:
     get:
       tags:
-      - article
+        - article
       operationId: "getTagsByTagNameDate"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: Your Authorization Token in the form 'Token <AUTH_TOKEN>'
-      - name: "tagName"
-        in: "path"
-        required: true
-        type: "string"
-      - name: "date"
-        in: "path"
-        required: true
-        type: "string"
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: Your Authorization Token in the form 'Token <AUTH_TOKEN>'
+        - name: "tagName"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "date"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         "200":
           description: Success
@@ -166,11 +166,11 @@ paths:
         "400":
           description: Invalid Tag or Date supplied
           schema:
-            $ref: '#/definitions/error'
+            $ref: "#/definitions/error"
         "404":
           description: Article Not Found
           schema:
-            $ref: '#/definitions/error'
+            $ref: "#/definitions/error"
 definitions:
   article_payload:
     required:
@@ -181,13 +181,13 @@ definitions:
     properties:
       title:
         type: string
-        example: 'latest science shows that potato chips are better for you than sugar'
+        example: "latest science shows that potato chips are better for you than sugar"
       date:
         type: string
-        example: '2016-09-22'
+        example: "2016-09-22"
       body:
         type: string
-        example: 'some text, potentially containing simple markup about how potato chips are great'
+        example: "some text, potentially containing simple markup about how potato chips are great"
       tags:
         type: array
         items:
@@ -203,7 +203,7 @@ definitions:
     properties:
       tag:
         type: string
-        example: 'health'
+        example: "health"
       count:
         type: integer
         example: 17
@@ -237,11 +237,8 @@ definitions:
     type: object
   signup_details:
     required:
-      - email
-      - name
       - password
       - username
-      - role
     properties:
       username:
         type: string
@@ -249,17 +246,6 @@ definitions:
       password:
         type: string
         example: khanna1234
-      email:
-        type: string
-        example: khanna@mohit.com
-      name:
-        type: string
-        example: mohit
-      role:
-        type: string
-        enum:
-          - Contributor
-          - Explorer
     type: object
   error:
     type: object
