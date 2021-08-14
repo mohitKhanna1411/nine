@@ -30,6 +30,7 @@ class Users(BaseTable):
 
 class Articles(BaseTable):
     id = AutoField()
+    uuid = TextField(null=False)
     user_id = ForeignKeyField(Users, backref='articles')
     title = TextField()
     body = TextField()
@@ -50,7 +51,7 @@ class Tags(BaseTable):
 def create_db():
     # check for file
     if os.path.exists(DB_NAME):
-        print("Database already exists.")
+        print("Database already exists.", flush=True)
         return False
     # creating the tables
     db.connect()

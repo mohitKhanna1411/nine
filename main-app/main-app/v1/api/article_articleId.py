@@ -12,4 +12,5 @@ class ArticleArticleid(Resource):
     def get(self, articleId):
         print(g.headers)
 
+        
         return {'title': 'something', 'date': 'something', 'body': 'something', 'tags': []}, 200, None
