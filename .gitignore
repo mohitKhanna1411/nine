@@ -13,7 +13,8 @@ instance/
 .webassets-cache
 
 # Environments
-# .env
+.env.dev
+.env
 .venv
 env/
 venv/
@@ -41,3 +42,7 @@ Generated\ Files/
 
 # Local History for Visual Studio Code
 .history/
+
+
+# db files
+nine.db

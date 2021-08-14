@@ -61,7 +61,7 @@
     "/auth/signup": {
       "post": {
         "responses": {
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/token_details"
@@ -371,11 +371,8 @@
     },
     "signup_details": {
       "required": [
-        "email",
-        "name",
         "password",
-        "username",
-        "role"
+        "username"
       ],
       "properties": {
         "username": {
@@ -385,21 +382,6 @@
         "password": {
           "type": "string",
           "example": "khanna1234"
-        },
-        "email": {
-          "type": "string",
-          "example": "khanna@mohit.com"
-        },
-        "name": {
-          "type": "string",
-          "example": "mohit"
-        },
-        "role": {
-          "type": "string",
-          "enum": [
-            "Contributor",
-            "Explorer"
-          ]
         }
       },
       "type": "object"
