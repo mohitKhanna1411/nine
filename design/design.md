@@ -7,6 +7,21 @@
 - SQLite as a database
 - Postman for E2E test
 - Swagger UI for API Documentation
+
+# Why this tech stack?
+
+- I choose python as my primary development language instead of Go (preferred) because I'm still an intermediate level in Go and dont know much about the best practices and frameworks used to structure the codebase. Also, without using a standardarized development method in Go, it would have gone against me. Hence, python! (I'm interested to learn Go though).
+
+- I choose peewee as the ORM as it is a simple and small ORM. It has few (but expressive) concepts, making it easy to learn and intuitive to use.
+
+- I choose this service to be dockerized, as it eliminates the gold old saying `it works on my system`.
+
+- I choose SQLite as the db is its easy and lightweighted relational database.
+
+- I choose Postman to do my E2E tests as it is standarized and doesnt require much installation setup or external libraries.
+
+- I choose to have all the APIs documented in Swagger as it gives much more insights for the APIs instead of relying on inline comments. Through this one can easily run and test the apis without having to install anything 3rd party software or module.
+
 # System Achitecture
 
 ![System Architecture Diagram](system_arch.png?raw=true "System Architecture")
@@ -46,3 +61,17 @@
 - TagNames table has columns `id as primary key` and name, which is unique.
 - Many Articles can have many TagNames. Hence there is a `M:N relation` between Articles and TagNames Table.
 - Whenever there is M:N relation, another table is created and here another table Tags is created with columns `id as primary key`, `article_id as foreign key` from Articles table and `tag_id as foreign key` from TagNames table.
+
+
+# About the test
+
+- I think this is one the best way to judge a software developer by giving them these kinds of problems instead tricky algorithmic questions. Those questions can really be found anywhere on the internet and will never give the actual insights about a person on thier codebase management skills.
+- It really tests everything from the codebase knowledge to in depth database knowledge and connecting them to the endpoints and having the business logic in between.
+- I thoroghly enjoyed developing the solution and I'm sure you'll be able to judge me better through this submission. Thanks!
+
+# Improvements
+
+- If I had time i would have added a frontend service to it (basic) developed in reactJS.
+- I would have deployed this microservice to any cloud platform such as AWS for better accessibility, availability and scalability.
+- I would have opted for a much mature relational database such as PostgreSQL instead of SQLite.
+- I would have also implemented this solution in Go instead of Python.

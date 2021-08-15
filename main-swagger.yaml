@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: Blue Technical Test
   version: 1.0.0
-  title: Nine Publishing
+  title: Nine Publishing [Article Service]
   contact:
     email: khanna.mohit94@gmail.com
 basePath: /v1
