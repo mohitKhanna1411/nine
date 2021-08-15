@@ -41,4 +41,4 @@ class Article(Resource):
                 article_id=article['id']
             )
 
-        return {'title': article['title'], 'date': article['date'], 'body': article['body'], 'tags': tags_arr}, 200, None
+        return {'id': article['id'], 'title': article['title'], 'date': article['date'], 'body': article['body'], 'tags': tags_arr}, 201, None

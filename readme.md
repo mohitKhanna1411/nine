@@ -13,15 +13,16 @@ $ docker-compose build
 $ docker-compose up
 ```
 
+## System Design
+
+Please read [DESIGN](design/design.md) file.
+
 ## API Documentation
 
 ```
 http://localhost:9000/static/swagger-ui/index.html
 ```
 
-## System Design
-
-Please read [DESIGN](design/design.md) file.
 
 ## E2E Test
 
@@ -33,7 +34,7 @@ $ npm i newman
 
 $ cd nine/main-app/tests
 
-$ newman run MenuPlanningService.postman_collection.json
+$ newman run nine.postman_collection.json
 ```
 
-- Alternatively, import MenuPlanningService.postman_collection.json file into your postman app and run the collection.
+- Alternatively, import nine.postman_collection.json file into your postman app and run the collection.

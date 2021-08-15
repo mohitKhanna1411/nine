@@ -3,7 +3,7 @@
   "info": {
     "description": "Blue Technical Test",
     "version": "1.0.0",
-    "title": "Nine Publishing",
+    "title": "Nine Publishing [Article Service]",
     "contact": {
       "email": "khanna.mohit94@gmail.com"
     }
@@ -99,7 +99,7 @@
     "/article/": {
       "post": {
         "responses": {
-          "200": {
+          "201": {
             "description": "Success",
             "schema": {
               "allOf": [

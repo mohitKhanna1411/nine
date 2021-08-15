@@ -63,7 +63,7 @@ paths:
   /article/:
     post:
       responses:
-        "200":
+        "201":
           description: Success
           schema:
             allOf:
