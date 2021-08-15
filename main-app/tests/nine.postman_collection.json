@@ -1,0 +1,815 @@
+{
+	"info": {
+		"_postman_id": "357d7609-6c24-4d15-93fa-82da67f25f49",
+		"name": "nine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.environment.set(\"token\", JsonData.token);",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.expect(JsonData.token).to.be.a('string');",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"mohitkhanna\",\n  \"password\": \"khanna1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(JsonData.message).to.include(\"Username Taken\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"mohitkhanna\",\n  \"password\": \"khanna1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup with no pass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 422\", function () {",
+							"    pm.response.to.have.status(422);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(JsonData.message).to.include(\"Unprocessable Entity\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"mohitkhanna\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.environment.set(\"token\", JsonData.token);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    const JsonData = pm.response.json()",
+							"    pm.expect(JsonData.token).to.be.a('string');",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"mohitkhanna\",\n  \"password\": \"khanna1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with wrong pass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(JsonData.message).to.include(\"Invalid Username/Password\");",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"mohitkhanna\",\n  \"password\": \"khanna12343\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login with no pass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 422\", function () {",
+							"    pm.response.to.have.status(422);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(JsonData.message).to.include(\"Unprocessable Entity\");",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"mohitkhanna\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"pm.environment.set(\"article_id\", JsonData.id);",
+							"pm.environment.set(\"tagName\", JsonData.tags[0]);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Test body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.body).to.eql('some text, potentially containing simple markup about how potato chips are great');",
+							"});",
+							"pm.test(\"Test date\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.date).to.eql('2016-09-22');",
+							"});",
+							"pm.test(\"Test title\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql('latest science shows that potato chips are better for you than sugar');",
+							"});",
+							"pm.test(\"Test tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tags).to.eql([",
+							"        \"health\",",
+							"        \"fitness\",",
+							"        \"science\"",
+							"    ]);",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"latest science shows that potato chips are better for you than sugar\",\n  \"date\": \"2016-09-22\",\n  \"body\": \"some text, potentially containing simple markup about how potato chips are great\",\n  \"tags\": [\n    \"health\",\n    \"fitness\",\n    \"science\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/article/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"article",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article without auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 422\", function () {",
+							"    pm.response.to.have.status(422);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(JsonData.message).to.include(\"Unprocessable Entity\");",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"latest science shows that potato chips are better for you than sugar\",\n  \"date\": \"2016-09-22\",\n  \"body\": \"some text, potentially containing simple markup about how potato chips are great\",\n  \"tags\": [\n    \"health\",\n    \"fitness\",\n    \"science\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/article/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"article",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article with expired token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(JsonData.message).to.include(\"Token Expired\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}_random",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"latest science shows that potato chips are better for you than sugar\",\n  \"date\": \"2016-09-22\",\n  \"body\": \"some text, potentially containing simple markup about how potato chips are great\",\n  \"tags\": [\n    \"health\",\n    \"fitness\",\n    \"science\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/article/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"article",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Test body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.body).to.eql('some text, potentially containing simple markup about how potato chips are great');",
+							"});",
+							"pm.test(\"Test date\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.date).to.eql('2016-09-22');",
+							"});",
+							"pm.test(\"Test title\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql('latest science shows that potato chips are better for you than sugar');",
+							"});",
+							"pm.test(\"Test tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tags).to.eql([",
+							"        \"health\",",
+							"        \"fitness\",",
+							"        \"science\"",
+							"    ]);",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/v1/article/{{article_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"article",
+						"{{article_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article with wrong token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(JsonData.message).to.include(\"Token Expired\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{wrong_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/v1/article/{{article_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"article",
+						"{{article_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Test body\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.body).to.eql('some text, potentially containing simple markup about how potato chips are great');",
+							"});",
+							"pm.test(\"Test date\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.date).to.eql('2016-09-22');",
+							"});",
+							"pm.test(\"Test title\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql('latest science shows that potato chips are better for you than sugar');",
+							"});",
+							"pm.test(\"Test tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tags).to.eql([",
+							"        \"health\",",
+							"        \"fitness\",",
+							"        \"science\"",
+							"    ]);",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"latest science shows that potato chips are better for you than sugar\",\n  \"date\": \"2016-09-22\",\n  \"body\": \"some text, potentially containing simple markup about how potato chips are great\",\n  \"tags\": [\n    \"health\",\n    \"fitness\",\n    \"science\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/v1/article/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"article",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tags",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Test total articles\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.articles.length).to.eql(2);",
+							"});",
+							"pm.test(\"Test articles\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.articles).to.eql([",
+							"        1,",
+							"        2",
+							"    ]);",
+							"});",
+							"pm.test(\"Test count\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(6);",
+							"});",
+							"pm.test(\"Test total realted_tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.related_tags.length).to.eql(2);",
+							"});",
+							"pm.test(\"Test realted_tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.related_tags).to.eql([",
+							"        \"fitness\",",
+							"        \"science\"",
+							"    ]);",
+							"});",
+							"pm.test(\"Test tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tag).to.eql(\"health\");",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/v1/tags/{{tagName}}/20160922",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"tags",
+						"{{tagName}}",
+						"20160922"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tags Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"Test message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql('Article not found');",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9000/v1/tags/{{tagName}}_wrong/20160922",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"v1",
+						"tags",
+						"{{tagName}}_wrong",
+						"20160922"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
