@@ -24,8 +24,8 @@ class Users(BaseTable):
     username = TextField(null=False, unique=True)
     password = TextField(null=False)
 
-# Recipes table defination
-# Recipes inheriting basetable
+# Articles table defination
+# Articles inheriting basetable
 
 
 class Articles(BaseTable):
@@ -37,9 +37,17 @@ class Articles(BaseTable):
     date = TextField()
 
 
+# TagNames table defination
+# TagNames inheriting basetable
+
+
 class TagNames(BaseTable):
     id = AutoField()
     name = TextField(null=False, unique=True)
+
+
+# Tags table defination
+# Tags inheriting basetable
 
 
 class Tags(BaseTable):
